@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                home.in
+        </title>
+    </head>
+    <body>
+        <br>
+        <br>
+        <h1>CREATE OPERATION</h1><br><br><br>
+        <form  method="POST" id="createStudentForm">
+            <div>
+                <label>  ID <b>:</b></label>
+                <input type="number" name="ID_No"  id="ID_No" placeholder="Id">
+                <br>
+                <br>
+                <label>NAME <b>:</b></label>
+                <input type="text" name="Name" id="Name" placeholder="Name">
+                <br>
+                <br>
+                <input type="submit" name="submit" value="submit" class="button">
+            </div></form>
+            </form>
+            <script>
+                document.getElementById('createStudentForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+    
+                    const student = {
+                        id: document.getElementById('ID_No').value,
+                        name: document.getElementById('Name').value
+                    };
+                    
+    
+                    try {
+                        const response = await fetch('http://localhost:8082/addstu', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(student)
+                        });
+    
+                        if (response.status === 201) {
+                            alert('Student created successfully!');
+                        } else {
+                            alert('Failed to create student.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error occurred while creating student.');
+                    }
+                });
+            </script>
+            <ol><a href="Untitled-1.html" target="blank">Home</a></ol>
+            <style>
+                div{
+                    text-align: center;
+        
+                 }
+                 h1{
+                    text-align: center;
+        
+                 }
+                 ol{
+                    text-align: center;
+                 }
+            </style>
+            
+            
+
+        
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                home.in
+        </title>
+    </head>
+    <body>
+        <h2>The Details you have Inserted</h2>
+        
+    </body>
+    <div>
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table></div>
+    
+    <br><br>
+    <ol><a href="Untitled-1.html" target="blank">Home</a></ol>
+
+    <script>
+        async function fetchStudents() {
+            try {
+                const response = await fetch('http://localhost:8082/stu/liststudents');
+                const students = await response.json();
+
+                const tableBody = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';  
+
+                if (students.length > 0) {
+                    students.forEach(student => {
+                        const row = tableBody.insertRow();
+
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+
+                        cell1.textContent = student.id;
+                        cell2.textContent = student.name;
+                    });
+                } else {
+                    const row = tableBody.insertRow();
+                    const cell = row.insertCell(0);
+                    cell.colSpan = 2;
+                    cell.textContent = 'No students found.';
+                    cell.style.textAlign = 'center';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error occurred while fetching students.');
+            }
+        }
+
+        
+        fetchStudents();
+    </script>
+
+    <style>
+                
+                 h2{
+                    text-align: center;
+        
+                 }
+                 ol{
+                    text-align: center;
+        
+                 }
+                 div{
+                 display: flex;
+                justify-content: center;  
+                align-items: center;      
+                height: 30vh;            
+                margin: 0;
+                 }
+                 
+            </style>
+            
+            
+</html>
